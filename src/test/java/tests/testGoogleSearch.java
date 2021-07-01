@@ -1,5 +1,6 @@
 package tests;
 
+
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.testng.Assert;
@@ -14,13 +15,15 @@ import java.util.Locale;
 public class testGoogleSearch {
     GooglePage googlePage = new GooglePage();
 
+
     @BeforeMethod
     public void setUpMethod() {
         Driver.getDriver().get("https://google.com");
     }
 
     @Test
-    public void testGoogleSearchBox() throws InterruptedException {
+    public boolean testGoogleSearchBox() throws InterruptedException {
+
         try {
             Thread.sleep(5000);
             googlePage.searchBox.sendKeys(searchThisWordInGoogleSearch("Duck") + Keys.ENTER);
@@ -32,6 +35,7 @@ public class testGoogleSearch {
         String searchItem = searchThisWordInGoogleSearch("Duck");
         String titleAfterSearch = Driver.getDriver().getTitle();
         Assert.assertTrue(titleAfterSearch.contains(searchItem));
+        return true;
     }
 
     public String searchThisWordInGoogleSearch(String word){
